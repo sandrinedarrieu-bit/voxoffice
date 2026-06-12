@@ -200,7 +200,11 @@
     </svg>
     VoxOffice
   </a>
-  <a class="nav-cta" href="https://tally.so/r/gDOGQD" target="_blank">Participer à l'étude</a>
+  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+    <button onclick="document.getElementById('beta-form').style.display=document.getElementById('beta-form').style.display==='none'?'block':'none'" class="nav-cta" style="cursor:pointer;border:none;">🚀 Rejoindre la bêta</button>
+    <a class="nav-cta" href="https://tally.so/r/gDOGQD" target="_blank" style="background:transparent;color:var(--purple);border:1.5px solid var(--purple);">💬 Donner mon avis</a>
+    <a href="#demo-section" class="nav-cta" style="background:transparent;color:var(--text);border:1.5px solid var(--border);">🎬 Voir la démo</a>
+  </div>
 </nav>
 
 <div class="hero">
@@ -211,44 +215,8 @@
 
 
 <!-- BANDEAU HERO -->
-<div style="text-align:center;padding:1rem 2rem 2rem;">
-  <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:1.5rem;flex-wrap:wrap;">
-    <button onclick="document.getElementById('beta-form').style.display=document.getElementById('beta-form').style.display==='none'?'block':'none'" class="cta-btn" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;font-size:14px;border:none;cursor:pointer;">🚀 Rejoindre la bêta</button>
-    <a href="https://tally.so/r/gDOGQD" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;font-size:14px;font-weight:500;border:1.5px solid var(--border);border-radius:var(--radius-lg);color:var(--text);text-decoration:none;transition:all 0.15s;" onmouseover="this.style.borderColor='var(--purple)'" onmouseout="this.style.borderColor='var(--border)'">💬 Donner mon avis</a>
-    <a href="#demo-section" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;font-size:14px;font-weight:500;border:1.5px solid var(--border);border-radius:var(--radius-lg);color:var(--text);text-decoration:none;transition:all 0.15s;" onmouseover="this.style.borderColor='var(--purple)'" onmouseout="this.style.borderColor='var(--border)'">🎬 Voir la démo</a>
-  </div>
-  <!-- MINI FORMULAIRE BETA -->
-  <div id="beta-form" style="display:none;max-width:420px;margin:0 auto 1.5rem;background:var(--bg);border-radius:var(--radius-lg);border:1px solid var(--border);padding:20px;">
-    <div style="font-size:14px;font-weight:600;margin-bottom:4px;">Accès prioritaire à la bêta</div>
-    <div style="font-size:12px;color:var(--text-muted);margin-bottom:14px;">Vous serez parmi les premiers informés du lancement.</div>
-    <form id="betaFormEl" onsubmit="submitBeta(event)">
-      <input type="hidden" name="access_key" value="VOTRE_CLE_WEB3FORMS">
-      <input type="hidden" name="subject" value="Nouvelle inscription bêta VoxOffice">
-      <div style="margin-bottom:10px;">
-        <input type="text" name="prenom" placeholder="Votre prénom" required style="width:100%;border:1px solid var(--border);border-radius:var(--radius-md);padding:9px 12px;font-size:13px;outline:none;background:var(--bg-secondary);">
-      </div>
-      <div style="margin-bottom:10px;">
-        <input type="email" name="email" placeholder="Votre email" required style="width:100%;border:1px solid var(--border);border-radius:var(--radius-md);padding:9px 12px;font-size:13px;outline:none;background:var(--bg-secondary);">
-      </div>
-      <div style="margin-bottom:14px;">
-        <select name="metier" required style="width:100%;border:1px solid var(--border);border-radius:var(--radius-md);padding:9px 12px;font-size:13px;outline:none;background:var(--bg-secondary);color:var(--text);">
-          <option value="" disabled selected>Votre métier</option>
-          <option>Commercial / Représentant</option>
-          <option>Avocat / Juriste</option>
-          <option>Artisan BTP</option>
-          <option>Agent immobilier</option>
-          <option>Aide à domicile / EHPAD</option>
-          <option>Chargé de mission associatif</option>
-          <option>Responsable de formation</option>
-          <option>Association / Bénévoles</option>
-          <option>Autre</option>
-        </select>
-      </div>
-      <button type="submit" class="cta-btn" style="width:100%;border:none;cursor:pointer;padding:11px;font-size:13px;">🚀 Rejoindre la bêta</button>
-    </form>
-    <div id="beta-success" style="display:none;text-align:center;padding:12px;background:var(--green-light);border-radius:var(--radius-md);margin-top:10px;font-size:13px;color:var(--green-dark);">✅ Inscription confirmée — nous vous contacterons en priorité !</div>
-  </div>
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:600px;margin:0 auto;">
+<div style="text-align:center;padding:0 2rem 1.5rem;">
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:600px;margin:0 auto;margin-top:-0.5rem;">
     <div style="background:var(--bg-secondary);border-radius:var(--radius-lg);padding:16px 10px;text-align:center;">
       <div style="font-size:24px;margin-bottom:6px;">🎙️</div>
       <div style="font-size:12px;font-weight:500;color:var(--text);">Vous parlez</div>
@@ -266,6 +234,7 @@
       <div style="font-size:12px;font-weight:500;color:var(--text);">Tout est à jour</div>
     </div>
   </div>
+
 </div>
 
 <div class="divider"></div>
