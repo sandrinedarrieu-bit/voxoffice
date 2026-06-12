@@ -186,6 +186,9 @@
   footer { border-top: 0.5px solid var(--border); padding: 16px 24px; text-align: center; }
   .footer-logo { font-size: 14px; font-weight: 600; color: var(--purple); }
   .mt-12 { margin-top: 12px; }
+
+  .dscreen { display: none; }
+  .dscreen.on { display: block; }
 </style>
 </head>
 <body>
@@ -275,48 +278,133 @@
 <div class="section" id="demo-section">
   <div class="eyebrow">Essayez par vous-même</div>
   <div class="section-h">Dictez. VoxOffice fait le reste.</div>
-  <div class="section-sub">Choisissez votre métier, cliquez sur le micro — voyez VoxOffice créer votre fiche, enregistrer votre note et générer votre document en temps réel.</div>
+  <div class="section-sub">Suivez Marie, commerciale terrain, de la dictée vocale au document professionnel — en moins de 2 minutes, sans saisie.</div>
+
   <div class="demo-wrap">
-    <div class="scenario-tabs" id="dTabs"></div>
-    <div class="step-indicator">
-      <div class="step-dot active" id="ds1">1</div>
-      <div class="step-line" id="dl1"></div>
-      <div class="step-dot" id="ds2">2</div>
-      <div class="step-line" id="dl2"></div>
-      <div class="step-dot" id="ds3">3</div>
-    </div>
-    <div class="demo-grid">
-      <div class="demo-left">
-        <div class="dictee-label">Ce que vous dictez</div>
-        <div class="script-box" id="dScript"></div>
-        <div class="d-mic-zone">
-          <button class="d-mic-btn" id="dMicBtn" aria-label="Lancer la simulation">🎙️</button>
-          <div class="d-waves"><div class="wb" id="b1"></div><div class="wb" id="b2"></div><div class="wb" id="b3"></div><div class="wb" id="b4"></div><div class="wb" id="b5"></div></div>
-          <div class="d-mic-label" id="dMicLabel">Cliquez pour dicter</div>
-        </div>
-        <div class="d-transcript" id="dTranscript">La transcription apparaîtra ici...</div>
-        <button class="reset-btn" id="dResetBtn" onclick="resetDemo()" style="display:none;">↺ Recommencer</button>
+    <div style="background:#534AB7;border-radius:var(--radius-lg);padding:10px 14px;margin-bottom:10px;">
+      <div style="font-size:10px;font-weight:500;color:#AFA9EC;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">Choisissez votre métier</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;" id="metierTabs">
+        <div style="padding:6px 14px;border-radius:16px;font-size:12px;font-weight:500;cursor:pointer;background:rgba(255,255,255,0.25);color:#EEEDFE;border:1px solid rgba(255,255,255,0.3);" class="mtab on" onclick="setMetier('commercial')">💼 Commercial</div>
+        <div style="padding:6px 14px;border-radius:16px;font-size:12px;font-weight:500;cursor:pointer;background:transparent;color:rgba(255,255,255,0.65);border:1px solid rgba(255,255,255,0.2);" class="mtab" onclick="setMetier('artisan')">🔧 Artisan BTP</div>
+        <div style="padding:6px 14px;border-radius:16px;font-size:12px;font-weight:500;cursor:pointer;background:transparent;color:rgba(255,255,255,0.65);border:1px solid rgba(255,255,255,0.2);" class="mtab" onclick="setMetier('formateur')">🎓 Formateur</div>
+        <div style="padding:6px 14px;border-radius:16px;font-size:12px;font-weight:500;cursor:pointer;background:transparent;color:rgba(255,255,255,0.65);border:1px solid rgba(255,255,255,0.2);" class="mtab" onclick="setMetier('avocat')">⚖️ Avocat</div>
       </div>
-      <div class="demo-right">
-        <div class="result-panel" id="dPanelContact">
-          <div class="rp-title">✦ Fiche créée automatiquement</div>
-          <div id="dContactFields"></div>
-          <div class="badge-row" id="dContactBadges"></div>
-        </div>
-        <div class="result-panel" id="dPanelNote">
-          <div class="rp-title">🎙️ Note enregistrée</div>
-          <div class="note-content" id="dNoteContent"></div>
-          <div class="note-date" id="dNoteDate"></div>
-        </div>
-        <div class="result-panel" id="dPanelDoc">
-          <div class="rp-title">✦ Document généré par IA</div>
-          <div class="doc-preview">
-            <div class="doc-preview-title">📄 <span id="dDocTitle"></span></div>
-            <div class="doc-line" style="width:90%;"></div>
-            <div class="doc-line" style="width:75%;"></div>
-            <div class="doc-line" style="width:60%;"></div>
-            <div class="doc-note" id="dDocNote"></div>
+    </div>
+    <div style="display:flex;gap:6px;margin-bottom:1.2rem;flex-wrap:wrap;" id="dTabs">
+      <div class="stab on" onclick="dShow(0)">1 · Tableau de bord</div>
+      <div class="stab" onclick="dShow(1)">2 · Dictée vocale</div>
+      <div class="stab" onclick="dShow(2)">3 · Fiche créée</div>
+    </div>
+
+    <div class="dscreen on" id="dsc0">
+      <div class="demo-grid">
+        <div class="demo-left" style="border-radius:20px;overflow:hidden;padding:0;">
+          <div style="background:#534AB7;padding:10px 12px;"><div class="ptitle" style="color:#EEEDFE;font-size:11px;font-weight:500;">VoxOffice · Commercial</div><div class="psub" style="color:#AFA9EC;font-size:9px;margin-top:1px;">Bonjour Marie · Commercial</div></div>
+          <div style="padding:10px;background:var(--color-background-tertiary);min-height:240px;">
+            <div style="display:flex;gap:4px;margin-bottom:8px;">
+              <div style="flex:1;background:var(--color-background-primary);border-radius:8px;border:0.5px solid var(--color-border-tertiary);padding:6px;text-align:center;"><div style="font-size:14px;font-weight:500;color:#534AB7;">3</div><div style="font-size:8px;color:var(--color-text-secondary);">Alertes</div></div>
+              <div style="flex:1;background:var(--color-background-primary);border-radius:8px;border:0.5px solid var(--color-border-tertiary);padding:6px;text-align:center;"><div style="font-size:14px;font-weight:500;color:#534AB7;">2</div><div style="font-size:8px;color:var(--color-text-secondary);">RDV</div></div>
+              <div style="flex:1;background:var(--color-background-primary);border-radius:8px;border:0.5px solid var(--color-border-tertiary);padding:6px;text-align:center;"><div style="font-size:14px;font-weight:500;color:#E24B4A;">4</div><div style="font-size:8px;color:var(--color-text-secondary);">Relances</div></div>
+            </div>
+            <div class="dash-item" style="background:var(--color-background-primary);border-radius:8px;border:0.5px solid var(--color-border-tertiary);padding:8px 10px;margin-bottom:6px;"><div class="di-title" style="font-size:10px;font-weight:500;">Dupont SAS</div><div class="di-sub" style="font-size:8px;color:var(--color-text-secondary);">RDV effectué · 2h</div></div>
+            <div class="dash-item" style="background:var(--color-background-primary);border-radius:8px;border:0.5px solid var(--color-border-tertiary);padding:8px 10px;"><div class="di-title" style="font-size:10px;font-weight:500;">Martin &amp; Co</div><div class="di-sub" style="font-size:8px;color:var(--color-text-secondary);">Relance en attente · J-2</div></div>
           </div>
+          <div style="display:flex;border-top:0.5px solid var(--color-border-tertiary);background:var(--color-background-primary);padding:6px 0 4px;">
+            <div style="flex:1;text-align:center;font-size:8px;color:#534AB7;">🏠 Accueil</div>
+            <div style="flex:1;text-align:center;font-size:8px;color:var(--color-text-secondary);">👥 Contacts</div>
+            <div style="flex:1;text-align:center;font-size:8px;color:var(--color-text-secondary);">📅 Agenda</div>
+            <div style="flex:1;text-align:center;font-size:8px;color:var(--color-text-secondary);">🔔 Alertes</div>
+          </div>
+        </div>
+        <div class="demo-right" style="justify-content:center;">
+          <div style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px;">Tableau de bord commercial</div>
+          <div style="font-size:12px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:12px;">Marie sort d'un RDV avec un nouveau prospect. Elle voit ses alertes, RDV et relances en un coup d'œil.</div>
+          <button onclick="dShow(1)" style="width:100%;background:#534AB7;color:#fff;border:none;border-radius:8px;padding:10px;font-size:12px;font-weight:500;cursor:pointer;">🎙️ Voir la dictée →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="dscreen" id="dsc1">
+      <div class="demo-grid">
+        <div class="demo-left" style="border-radius:20px;overflow:hidden;padding:0;">
+          <div style="background:#534AB7;padding:10px 12px;"><div style="color:#EEEDFE;font-size:11px;font-weight:500;">Nouveau contact · Dictée</div></div>
+          <div style="padding:10px;background:var(--color-background-tertiary);min-height:240px;">
+            
+            <div style="text-align:center;margin-bottom:8px;">
+              <button id="dMicBtn" style="width:44px;height:44px;border-radius:50%;background:#534AB7;border:none;cursor:pointer;font-size:20px;display:inline-flex;align-items:center;justify-content:center;" aria-label="Lancer la dictée">🎙️</button>
+              <div style="display:flex;align-items:center;justify-content:center;gap:2px;height:14px;margin:3px 0;">
+                <div style="width:2px;border-radius:1px;background:#534AB7;height:2px;transition:height 0.1s;" id="db1"></div>
+                <div style="width:2px;border-radius:1px;background:#534AB7;height:2px;transition:height 0.1s;" id="db2"></div>
+                <div style="width:2px;border-radius:1px;background:#534AB7;height:2px;transition:height 0.1s;" id="db3"></div>
+                <div style="width:2px;border-radius:1px;background:#534AB7;height:2px;transition:height 0.1s;" id="db4"></div>
+                <div style="width:2px;border-radius:1px;background:#534AB7;height:2px;transition:height 0.1s;" id="db5"></div>
+              </div>
+              <div style="font-size:9px;color:var(--color-text-secondary);" id="dMst">Appuyer pour simuler</div>
+            </div>
+            <div style="background:var(--color-background-primary);border-radius:8px;border:0.5px solid var(--color-border-tertiary);padding:8px;font-size:9px;color:var(--color-text-secondary);font-style:italic;min-height:36px;line-height:1.5;" id="dTbox">La transcription apparaîtra ici...</div>
+          </div>
+        </div>
+        <div class="demo-right" style="justify-content:center;">
+          <div style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px;">Dictée vocale en situation réelle</div>
+          <div style="font-size:12px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:12px;">Marie dicte naturellement en marchant. VoxOffice transcrit et extrait automatiquement nom, société, téléphone et budget.</div>
+          <div style="font-size:12px;color:#534AB7;font-weight:500;">← Cliquez sur le micro violet</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dscreen" id="dsc2">
+      <div class="demo-grid">
+        <div class="demo-left" style="border-radius:20px;overflow:hidden;padding:0;">
+          <div style="background:#534AB7;padding:10px 12px;"><div style="color:#EEEDFE;font-size:11px;font-weight:500;">Thomas Renard</div><div style="color:#AFA9EC;font-size:9px;">Renard Industries · Prospect</div></div>
+          <div style="padding:10px;background:var(--color-background-tertiary);min-height:240px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+              <div class="fiche-init" style="width:28px;height:28px;border-radius:50%;background:#EEEDFE;color:#3C3489;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:500;flex-shrink:0;">TR</div>
+              <div style="flex:1;"><div class="fiche-nom" style="font-size:11px;font-weight:500;">Thomas Renard</div><div class="fiche-soc" style="font-size:8px;color:var(--color-text-secondary);">Renard Industries</div></div>
+              <span style="background:#FAEEDA;color:#854F0B;padding:2px 6px;border-radius:6px;font-size:9px;font-weight:500;">Prospect</span>
+            </div>
+            <div style="background:var(--color-background-primary);border-radius:8px;border:0.5px solid var(--color-border-tertiary);padding:8px;margin-bottom:6px;">
+              <div style="display:flex;gap:5px;padding:3px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:10px;"><span class="fiche-field-l" style="color:var(--color-text-secondary);width:55px;">Tél.</span><span class="fiche-field-v" style="font-weight:500;">06 23 45 67 89</span></div>
+              <div style="display:flex;gap:5px;padding:3px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:10px;"><span class="fiche-field-l" style="color:var(--color-text-secondary);width:55px;">Budget</span><span class="fiche-field-v" style="font-weight:500;">20 000 €</span></div>
+              <div style="display:flex;gap:5px;padding:3px 0;font-size:10px;"><span class="fiche-field-l" style="color:var(--color-text-secondary);width:55px;">Décision</span><span class="fiche-field-v" style="font-weight:500;">Fin juillet</span></div>
+            </div>
+            <div class="fiche-note" style="background:#EEEDFE;border-radius:8px;padding:6px 8px;font-size:9px;color:#26215C;line-height:1.5;">"Budget 20 000 €, décision fin juillet. Relancer début juillet."</div>
+            <div class="fiche-tags" style="display:flex;gap:3px;flex-wrap:wrap;margin-top:5px;"><span style="background:#EEEDFE;color:#3C3489;padding:2px 6px;border-radius:6px;font-size:9px;">Budget 20k€</span><span style="background:#FAEEDA;color:#854F0B;padding:2px 6px;border-radius:6px;font-size:9px;">Décision juil.</span><span style="background:#EAF3DE;color:#3B6D11;padding:2px 6px;border-radius:6px;font-size:9px;">Relance J+15</span></div>
+          </div>
+        </div>
+        <div class="demo-right" style="justify-content:center;">
+          <div style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px;">Fiche créée automatiquement</div>
+          <div style="font-size:12px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:12px;">En 30 secondes, VoxOffice a créé la fiche complète avec note vocale et tags. Accessible par toute l'équipe immédiatement.</div>
+<div style="background:#EAF3DE;border-radius:8px;padding:10px;font-size:12px;color:#3B6D11;font-weight:500;text-align:center;">✓ Fiche créée — 30 secondes, zéro saisie</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dscreen" id="dsc3">
+      <div class="demo-grid">
+        <div class="demo-left" style="border-radius:20px;overflow:hidden;padding:0;">
+          <div style="background:#534AB7;padding:10px 12px;"><div style="color:#EEEDFE;font-size:11px;font-weight:500;">Compte-rendu</div><div style="color:#AFA9EC;font-size:9px;">Généré par IA · Thomas Renard</div></div>
+          <div style="padding:10px;background:var(--color-background-tertiary);min-height:240px;">
+            <div style="background:#EEEDFE;border-radius:8px;padding:8px;margin-bottom:8px;">
+              <div style="font-size:9px;font-weight:500;color:#534AB7;margin-bottom:5px;">✦ <span class="doc-title">Compte-rendu de prospection</span></div>
+              <div style="height:4px;border-radius:2px;background:#AFA9EC;margin-bottom:3px;width:90%;"></div>
+              <div style="height:4px;border-radius:2px;background:#AFA9EC;margin-bottom:3px;width:75%;"></div>
+              <div style="height:4px;border-radius:2px;background:#AFA9EC;width:55%;"></div>
+            </div>
+            <div style="background:var(--color-background-primary);border-radius:8px;border:0.5px solid var(--color-border-tertiary);padding:8px;margin-bottom:8px;">
+              <div style="font-size:8px;color:var(--color-text-secondary);margin-bottom:4px;">Généré depuis</div>
+              <div style="font-size:9px;margin-bottom:3px;" class="doc-sub">👤 Généré depuis la fiche + note vocale</div>
+            </div>
+            <div style="display:flex;gap:4px;">
+              <button style="flex:1;background:#534AB7;color:#fff;border:none;border-radius:8px;padding:6px;font-size:9px;cursor:pointer;">⬇️ PDF</button>
+              <button style="flex:1;background:var(--color-background-primary);color:var(--color-text-primary);border:0.5px solid var(--color-border-tertiary);border-radius:8px;padding:6px;font-size:9px;cursor:pointer;">✉️ Email</button>
+            </div>
+          </div>
+        </div>
+        <div class="demo-right" style="justify-content:center;">
+          <div style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px;">Document généré par IA</div>
+          <div style="font-size:12px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:12px;">Compte-rendu complet depuis la fiche et la note vocale. Téléchargeable en PDF ou envoyable par email directement.</div>
+          <div style="background:#EAF3DE;border-radius:8px;padding:10px;font-size:12px;color:#3B6D11;font-weight:500;margin-bottom:8px;">✓ 2 minutes · zéro saisie</div>
+          <button onclick="dShow(0)" style="width:100%;background:var(--color-background-secondary);color:var(--color-text-primary);border:0.5px solid var(--color-border-tertiary);border-radius:8px;padding:10px;font-size:12px;cursor:pointer;">↺ Recommencer</button>
         </div>
       </div>
     </div>
@@ -408,12 +496,12 @@ const profils = [
     docs:[{icon:'📄',t:'Compte-rendu de visite',s:'Généré par IA'},{icon:'📊',t:'Proposition commerciale',s:'Auto-remplie'}]},
   {id:'avocat',label:'Avocat',sub:'Cabinet',icon:'⚖️',title:'Dossiers en cours',
     pains:['Calculer les délais procéduraux à la main','Ressaisir les infos client dans plusieurs outils','Rédiger les conclusions depuis zéro à chaque fois'],
-    goods:['Dossier créé par dictée en 20 secondes','Délais calculés automatiquement','Document pré-rempli depuis l\'historique du dossier'],
+    goods:['Dossier créé par dictée en 20 secondes','Délais calculés automatiquement','Brouillon pré-structuré depuis l\'historique du dossier'],
     rows:[{av:'CF',name:'Ferrand c/ Martin',badge:'Audience J-12',bc:'rgba(220,80,80,0.35)'},{av:'DB',name:'Dubois succession',badge:'En cours',bc:'rgba(80,130,220,0.35)'},{av:'LM',name:'Lopez licenciement',badge:'Plaidoirie',bc:'rgba(255,180,30,0.4)'}],
     docs:[{icon:'📝',t:'Conclusions n°2',s:'Brouillon IA prêt'},{icon:'✉️',t:'Mise en demeure',s:'Variables auto-remplies'}]},
   {id:'artisan',label:'Artisan BTP',sub:'Chantier',icon:'🔧',title:'Chantiers du jour',
     pains:['Refaire les bons d\'intervention au bureau le soir','Retrouver l\'adresse et le contact du client','Rédiger le rapport de chantier après l\'intervention'],
-    goods:['Bon d\'intervention créé par dictée sur le chantier','Fiche client accessible en un clic','Rapport généré automatiquement avec photos et notes'],
+    goods:['Bon d\'intervention créé par dictée sur le chantier','Fiche client accessible en un tap','Rapport généré automatiquement avec photos et notes'],
     rows:[{av:'DF',name:'Dupont — toiture',badge:'En cours',bc:'rgba(100,200,100,0.35)'},{av:'MR',name:'Martin — plomberie',badge:'Terminé',bc:'rgba(80,130,220,0.35)'},{av:'LB',name:'Lebrun — électricité',badge:'Demain',bc:'rgba(255,180,30,0.4)'}],
     docs:[{icon:'✅',t:"Bon d'intervention",s:'Signature sur l\'app, sur place'},{icon:'🧾',t:'Rapport de chantier',s:'Photos + notes'}]},
   {id:'mission',label:'Chargé de mission',sub:'Association',icon:'📋',title:'Projets en cours',
@@ -422,7 +510,7 @@ const profils = [
     rows:[{av:'CA',name:'Projet Région Alpha',badge:'Dossier J-20',bc:'rgba(220,80,80,0.35)'},{av:'PB',name:'Partenariat Mairie',badge:'En cours',bc:'rgba(100,200,100,0.35)'},{av:'SE',name:'Séminaire annuel',badge:'Planifié',bc:'rgba(255,180,30,0.4)'}],
     docs:[{icon:'📓',t:'Compte-rendu réunion',s:'Depuis notes vocales'},{icon:'📈',t:"Bilan d'activité",s:'Données agrégées'}]},
   {id:'immo',label:'Agent immobilier',sub:'Vente / Location',icon:'🏢',title:'Biens en portefeuille',
-    pains:['Créer les fiches biens','Rédiger le bon de visite à la main sur place','Ressaisir les retours acquéreurs après la visite'],
+    pains:['Imprimer les fiches biens avant chaque visite','Rédiger le bon de visite à la main sur place','Ressaisir les retours acquéreurs après la visite'],
     goods:['Fiche bien dictée et créée en 20 secondes','Bon de visite généré et signable sur tablette','Note vocale post-visite liée automatiquement au bien'],
     rows:[{av:'T3',name:'T3 Caen centre',badge:'Visite J+2',bc:'rgba(255,180,30,0.4)'},{av:'MA',name:'Maison Hérouville',badge:'Offre reçue',bc:'rgba(100,200,100,0.35)'},{av:'ST',name:'Studio Bayeux',badge:'Disponible',bc:'rgba(80,130,220,0.35)'}],
     docs:[{icon:'🏠',t:'Bon de visite',s:'Signature directement sur l\'app'},{icon:'📃',t:"Offre d'achat",s:'Variables auto-remplies'}]},
@@ -433,7 +521,7 @@ const profils = [
     docs:[{icon:'📋',t:'Fiche de transmission',s:'Dictée vocale → texte'},{icon:'📅',t:'Planning intervention',s:'Synchronisé équipe'}]},
   {id:'formation',label:'Formation',sub:'OF / Formateur',icon:'🎓',title:'Sessions en cours',
     pains:['Faire signer les émargements papier à scanner','Créer les attestations une par une','Ressaisir les bilans stagiaires dans plusieurs outils'],
-    goods:['Émargement signé sur l\'app, sans papier','Attestation générée en 1 clic depuis la fiche','Bilan de session généré automatiquement depuis les données session'],
+    goods:['Émargement signé sur l\'app, sans papier','Attestation générée en 1 tap depuis la fiche','Bilan de session généré automatiquement depuis les données session'],
     rows:[{av:'JS',name:'JS React — 12 stagiaires',badge:"Aujourd'hui",bc:'rgba(100,200,100,0.35)'},{av:'IA',name:'IA pour TPE — 8 stagiaires',badge:'Demain',bc:'rgba(255,180,30,0.4)'},{av:'EX',name:'Excel avancé',badge:'J+5',bc:'rgba(80,130,220,0.35)'}],
     docs:[{icon:'🏅',t:'Attestation de présence',s:'Par stagiaire'},{icon:'📊',t:'Bilan de formation',s:'Données session'}]},
   {id:'asso',label:'Association',sub:'Bureau / Bénévoles',icon:'👥',title:'Adhérents actifs',
@@ -487,180 +575,181 @@ function selectQ(el, key) {
   document.getElementById('revealBox').classList.add('show');
 }
 
-const dScenarios = [
-  {id:'commercial',label:'💼 Commercial',
-   script:'"Nouveau contact. Martin Dupont, société Dupont SAS. Téléphone 06 12 34 56 78. Email martin@dupontsas.fr. Budget 15 000 euros, décision en septembre."',
-   transcript:'Nouveau contact. Martin Dupont, société Dupont SAS. Téléphone 06 12 34 56 78. Email martin@dupontsas.fr. Budget 15 000 euros, décision en septembre.',
-   fields:[{l:'Nom',v:'Martin Dupont'},{l:'Société',v:'Dupont SAS'},{l:'Tél.',v:'06 12 34 56 78'},{l:'Email',v:'martin@dupontsas.fr'},{l:'Statut',v:'Prospect'}],
-   badges:['Budget 15 000 €','Décision sept.','Relance J+30'],
-   note:'Client potentiel — budget confirmé 15 000 €, décision prévue en septembre.',
-   docTitle:'Compte-rendu de prospection',docNote:'Généré depuis la fiche + note vocale'},
-  {id:'artisan',label:'🔧 Artisan',
-   script:'"Nouveau chantier. Client Lebrun, 12 rue de la Paix, Caen. Électricité, remplacement tableau. Mardi 17 juin matin. Devis 1 800 euros."',
-   transcript:'Nouveau chantier. Client Lebrun, 12 rue de la Paix, Caen. Électricité, remplacement tableau. Mardi 17 juin matin. Devis 1 800 euros.',
-   fields:[{l:'Client',v:'M. Lebrun'},{l:'Adresse',v:'12 rue de la Paix, Caen'},{l:'Travaux',v:'Électricité — tableau'},{l:'Date',v:'Mardi 17 juin'},{l:'Devis',v:'1 800 €'}],
-   badges:['Intervention J+5','Devis à envoyer'],
-   note:'Remplacement tableau électrique — client disponible mardi matin.',
-   docTitle:"Bon d'intervention",docNote:'Pré-rempli — à faire signer sur place'},
-  {id:'formateur',label:'🎓 Formateur',
-   script:'"Nouveau stagiaire. Sophie Martin, email sophie.martin@gmail.com, téléphone 07 45 23 11 89. Session IA pour TPE du 23 au 25 juin."',
-   transcript:'Nouveau stagiaire. Sophie Martin, email sophie.martin@gmail.com, téléphone 07 45 23 11 89. Session IA pour TPE du 23 au 25 juin.',
-   fields:[{l:'Stagiaire',v:'Sophie Martin'},{l:'Email',v:'sophie.martin@gmail.com'},{l:'Tél.',v:'07 45 23 11 89'},{l:'Session',v:'IA pour TPE'},{l:'Dates',v:'23 au 25 juin'}],
-   badges:['Convention à envoyer','Émargement préparé'],
-   note:'Inscription validée — convention à envoyer avant le 20 juin.',
-   docTitle:'Convention de formation',docNote:'Pré-remplie depuis la fiche stagiaire'},
-  {id:'avocat',label:'⚖️ Avocat',
-   script:'"Nouveau dossier. Cliente Claire Ferrand, litige commercial contre Martin SARL. Assignation reçue le 10 juin. Audience 15 septembre."',
-   transcript:'Nouveau dossier. Cliente Claire Ferrand, litige commercial contre Martin SARL. Assignation reçue le 10 juin. Audience 15 septembre.',
-   fields:[{l:'Client',v:'Claire Ferrand'},{l:'Partie adverse',v:'Martin SARL'},{l:'Nature',v:'Litige commercial'},{l:'Audience',v:'15 septembre'},{l:'Délai',v:'Conclusions J+30'}],
-   badges:['Conclusions J-60','Audience J-95'],
-   note:'Assignation reçue — délai conclusions calculé au 10 juillet.',
-   docTitle:'Fiche délais procéduraux',docNote:'Délais calculés automatiquement'}
-];
-
-let dCurrent = dScenarios[0], dRunning = false, dWInt = null, dTInt = null;
-const dWids = ['b1','b2','b3','b4','b5'];
-
-function dSetStep(n) {
-  [1,2,3].forEach(i => {
-    const d = document.getElementById('ds'+i);
-    d.classList.remove('active','done');
-    if(i < n) d.classList.add('done');
-    else if(i === n) d.classList.add('active');
-  });
-  [1,2].forEach(i => {
-    const l = document.getElementById('dl'+i);
-    l.classList.remove('done');
-    if(i < n) l.classList.add('done');
-  });
+function dShow(n) {
+  const tabs = document.querySelectorAll('.stab');
+  const screens = document.querySelectorAll('.dscreen');
+  if(!tabs.length || !screens.length) return;
+  tabs.forEach((t,i) => t.classList.toggle('on', i===n));
+  screens.forEach((s,i) => s.classList.toggle('on', i===n));
 }
 
-function setDScenario(s) {
-  dCurrent = s;
-  document.querySelectorAll('.stab').forEach(t => t.classList.remove('active'));
-  document.getElementById('dtab-'+s.id).classList.add('active');
-  document.getElementById('dScript').textContent = s.script;
-  resetDemo();
-}
-
-function resetDemo() {
-  if(dRunning){ clearInterval(dWInt); clearInterval(dTInt); dRunning = false; }
-  document.getElementById('dMicBtn').className = 'd-mic-btn';
-  document.getElementById('dMicBtn').textContent = '🎙️';
-  document.getElementById('dMicLabel').textContent = 'Cliquez pour dicter';
-  document.getElementById('dMicLabel').classList.remove('act');
-  document.getElementById('dTranscript').textContent = 'La transcription apparaîtra ici...';
-  document.getElementById('dTranscript').classList.remove('filled');
-  ['dPanelContact','dPanelNote','dPanelDoc'].forEach(id => document.getElementById(id).classList.remove('show'));
-  document.getElementById('dResetBtn').style.display = 'none';
-  document.getElementById('dContactFields').innerHTML = '';
-  document.getElementById('dContactBadges').innerHTML = '';
-  dWids.forEach(id => { document.getElementById(id).style.height = '3px'; });
-  dSetStep(1);
-}
-
-function dTypeFields(fields, badges, cb) {
-  const container = document.getElementById('dContactFields');
-  container.innerHTML = '';
-  document.getElementById('dContactBadges').innerHTML = '';
-  document.getElementById('dPanelContact').classList.add('show');
-  let fi = 0;
-  function nextField() {
-    if(fi >= fields.length) {
-      badges.forEach(b => {
-        const span = document.createElement('span');
-        span.className = 'demo-badge'; span.textContent = b;
-        document.getElementById('dContactBadges').appendChild(span);
-      });
-      if(cb) cb();
-      return;
-    }
-    const f = fields[fi++];
-    const row = document.createElement('div');
-    row.className = 'field-row';
-    row.innerHTML = `<span class="field-label">${f.l}</span><span class="field-value" id="dfv-${fi}"></span>`;
-    container.appendChild(row);
-    const el = document.getElementById('dfv-'+fi);
-    let ci = 0;
-    const t = setInterval(() => {
-      if(ci < f.v.length) { el.textContent += f.v[ci++]; }
-      else { clearInterval(t); setTimeout(nextField, 100); }
-    }, 25);
+let dRunning = false;
+document.addEventListener('click', function(e) {
+  if(e.target.id === 'dMicBtn' || e.target.closest('#dMicBtn')) {
+    runDDemo();
   }
-  nextField();
-}
+});
 
-document.getElementById('dMicBtn').addEventListener('click', () => {
+function runDDemo() {
   if(dRunning) return;
-  dRunning = true;
   const btn = document.getElementById('dMicBtn');
-  const lbl = document.getElementById('dMicLabel');
-  const tr = document.getElementById('dTranscript');
-  btn.className = 'd-mic-btn rec'; btn.textContent = '⏹️';
-  lbl.textContent = 'Dictée en cours...'; lbl.classList.add('act');
-  tr.textContent = ''; tr.classList.remove('filled');
-  dSetStep(2);
-  dWInt = setInterval(() => { dWids.forEach(id => { document.getElementById(id).style.height = (3+Math.random()*14)+'px'; }); }, 110);
-  const txt = dCurrent.transcript;
+  const mst = document.getElementById('dMst');
+  const tbox = document.getElementById('dTbox');
+  if(!btn || !tbox || !mst) return;
+  dRunning = true;
+  btn.style.background = '#E24B4A';
+  btn.textContent = '⏹️';
+  if(mst) { mst.textContent = 'Dictée en cours...'; mst.style.color = '#E24B4A'; }
+  tbox.textContent = '';
+  tbox.style.fontStyle = 'normal';
+  tbox.style.color = 'var(--text)';
+  const wInt = setInterval(() => {
+    ['db1','db2','db3','db4','db5'].forEach(id => {
+      const el = document.getElementById(id);
+      if(el) el.style.height = (2+Math.random()*12)+'px';
+    });
+  }, 110);
+  const txt = metiers[currentMetier].dicteeTxt;
   let i = 0;
-  dTInt = setInterval(() => {
-    if(i < txt.length) { tr.textContent += txt[i++]; tr.classList.add('filled'); }
-    else {
-      clearInterval(dTInt); clearInterval(dWInt);
-      dWids.forEach(id => { document.getElementById(id).style.height = '3px'; });
-      btn.className = 'd-mic-btn'; btn.textContent = '✅';
-      lbl.textContent = 'Traitement en cours...'; lbl.classList.remove('act');
-      dSetStep(3);
-      setTimeout(() => {
-        lbl.textContent = 'Enregistré dans VoxOffice';
-        dTypeFields(dCurrent.fields, dCurrent.badges, () => {
-          setTimeout(() => {
-            document.getElementById('dPanelNote').classList.add('show');
-            document.getElementById('dNoteContent').textContent = dCurrent.note;
-            document.getElementById('dNoteDate').textContent = "Aujourd'hui · " + new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
-            setTimeout(() => {
-              document.getElementById('dPanelDoc').classList.add('show');
-              document.getElementById('dDocTitle').textContent = dCurrent.docTitle;
-              document.getElementById('dDocNote').textContent = dCurrent.docNote;
-              document.getElementById('dResetBtn').style.display = 'block';
-              dRunning = false;
-            }, 500);
-          }, 300);
-        });
-      }, 700);
+  const tInt = setInterval(() => {
+    const tb = document.getElementById('dTbox');
+    if(!tb) { clearInterval(tInt); clearInterval(wInt); dRunning=false; return; }
+    if(i < txt.length) {
+      tb.textContent += txt[i++];
+    } else {
+      clearInterval(tInt); clearInterval(wInt);
+      ['db1','db2','db3','db4','db5'].forEach(id => { const el=document.getElementById(id); if(el) el.style.height='2px'; });
+      const b2 = document.getElementById('dMicBtn');
+      const m2 = document.getElementById('dMst');
+      if(b2) { b2.style.background='#534AB7'; b2.textContent='✅'; }
+      if(m2) { m2.textContent='Fiche créée !'; m2.style.color='#3B6D11'; }
+      dRunning = false;
+      setTimeout(() => dShow(2), 900);
     }
   }, 28);
-});
+}
 
-const dTabs = document.getElementById('dTabs');
-dScenarios.forEach(s => {
-  const t = document.createElement('div');
-  t.className = 'stab'; t.id = 'dtab-'+s.id;
-  t.textContent = s.label;
-  t.onclick = () => setDScenario(s);
-  dTabs.appendChild(t);
-});
+const metiers = {
+  commercial: {
+    dashTitle: 'VoxOffice · Commercial',
+    dashSub: 'Bonjour Marie · Commercial',
+    items: [['Dupont SAS','RDV effectué · 2h'],['Martin & Co','Relance en attente · J-2']],
+    dicteeScript: '"Nouveau contact. Thomas Renard, société Renard Industries. Téléphone 06 23 45 67 89. Budget 20 000 euros, décision fin juillet."',
+    dicteeTxt: 'Nouveau contact. Thomas Renard, société Renard Industries. Téléphone 06 23 45 67 89. Budget 20 000 euros, décision fin juillet.',
+    ficheNom: 'Thomas Renard', ficheInitiales: 'TR', ficheSoc: 'Renard Industries',
+    ficheFields: [['Tél.','06 23 45 67 89'],['Budget','20 000 €'],['Décision','Fin juillet']],
+    ficheNote: '"Budget 20 000 €, décision fin juillet. Relancer début juillet."',
+    ficheTags: ['Budget 20k€','Décision juil.','Relance J+15'],
+    docTitle: 'Compte-rendu de prospection', docSub: 'Généré depuis la fiche + note vocale'
+  },
+  artisan: {
+    dashTitle: 'VoxOffice · Artisan BTP',
+    dashSub: 'Bonjour Paul · Artisan',
+    items: [['Chantier Lebrun','Électricité · demain matin'],['Dupont toiture','Terminé · hier']],
+    dicteeScript: '"Nouveau chantier. Client Lebrun, 12 rue de la Paix, Caen. Électricité, remplacement tableau. Mardi 17 juin matin. Devis 1 800 euros."',
+    dicteeTxt: 'Nouveau chantier. Client Lebrun, 12 rue de la Paix, Caen. Électricité, remplacement tableau. Mardi 17 juin matin. Devis 1 800 euros.',
+    ficheNom: 'M. Lebrun', ficheInitiales: 'ML', ficheSoc: '12 rue de la Paix, Caen',
+    ficheFields: [['Travaux','Électricité — tableau'],['Date','Mardi 17 juin'],['Devis','1 800 €']],
+    ficheNote: '"Remplacement tableau électrique — client disponible mardi matin."',
+    ficheTags: ['Intervention J+5','Devis à envoyer'],
+    docTitle: "Bon d'intervention", docSub: 'Pré-rempli — à faire signer sur place'
+  },
+  formateur: {
+    dashTitle: 'VoxOffice · Formation',
+    dashSub: 'Bonjour Sophie · Formatrice',
+    items: [['IA pour TPE — 8 stagiaires','Session demain'],['Excel avancé','Session J+5']],
+    dicteeScript: '"Nouveau participant. Sophie Martin, formation IA pour TPE, session du 23 au 25 juin. Téléphone 07 45 23 11 89. Participation confirmée."',
+    dicteeTxt: 'Nouveau participant. Sophie Martin, formation IA pour TPE, session du 23 au 25 juin. Téléphone 07 45 23 11 89. Participation confirmée.',
+    ficheNom: 'Sophie Martin', ficheInitiales: 'SM', ficheSoc: 'IA pour TPE · 23-25 juin',
+    ficheFields: [['Email','sophie.martin@gmail.com'],['Tél.','07 45 23 11 89'],['Statut','Confirmée']],
+    ficheNote: '"Participation confirmée — session IA pour TPE du 23 au 25 juin."',
+    ficheTags: ['Session confirmée','Relance J+7'],
+    docTitle: 'Fiche de participation', docSub: 'Générée depuis la confirmation vocale'
+  },
+  avocat: {
+    dashTitle: 'VoxOffice · Cabinet',
+    dashSub: 'Bonjour Maître Fontaine',
+    items: [['Ferrand c/ Martin','Audience J-12'],['Dubois succession','En cours']],
+    dicteeScript: '"Nouveau dossier. Cliente Claire Ferrand, litige commercial contre Martin SARL. Assignation reçue le 10 juin. Audience 15 septembre."',
+    dicteeTxt: 'Nouveau dossier. Cliente Claire Ferrand, litige commercial contre Martin SARL. Assignation reçue le 10 juin. Audience 15 septembre.',
+    ficheNom: 'Claire Ferrand', ficheInitiales: 'CF', ficheSoc: 'Litige commercial',
+    ficheFields: [['Partie adverse','Martin SARL'],['Audience','15 septembre'],['Délai','Conclusions J+30']],
+    ficheNote: '"Assignation reçue — délai conclusions calculé au 10 juillet."',
+    ficheTags: ['Conclusions J-60','Audience J-95'],
+    docTitle: 'Fiche délais procéduraux', docSub: 'Délais calculés automatiquement'
+  }
+};
 
-setDScenario(dScenarios[0]);
+let currentMetier = 'commercial';
 
-async function submitBeta(e) {
-  e.preventDefault();
-  const form = document.getElementById('betaFormEl');
-  const data = new FormData(form);
-  try {
-    const res = await fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      body: data
-    });
-    const json = await res.json();
-    if (json.success) {
-      form.style.display = 'none';
-      document.getElementById('beta-success').style.display = 'block';
+function setMetier(id) {
+  currentMetier = id;
+  document.querySelectorAll('.mtab').forEach(t => {
+    t.style.background = 'transparent';
+    t.style.color = 'rgba(255,255,255,0.65)';
+    t.style.borderColor = 'rgba(255,255,255,0.2)';
+  });
+  event.target.style.background = 'rgba(255,255,255,0.25)';
+  event.target.style.color = '#EEEDFE';
+  event.target.style.borderColor = 'rgba(255,255,255,0.3)';
+  dShow(0);
+  updateScreens();
+}
+
+function updateScreens() {
+  const m = metiers[currentMetier];
+  
+  // Tableau de bord
+  const dash = document.getElementById('dsc0');
+  if(dash) {
+    dash.querySelector('.ptitle') && (dash.querySelector('.ptitle').textContent = m.dashTitle);
+    dash.querySelector('.psub') && (dash.querySelector('.psub').textContent = m.dashSub);
+    const items = dash.querySelectorAll('.dash-item');
+    if(items.length >= 2) {
+      items[0].querySelector('.di-title').textContent = m.items[0][0];
+      items[0].querySelector('.di-sub').textContent = m.items[0][1];
+      items[1].querySelector('.di-title').textContent = m.items[1][0];
+      items[1].querySelector('.di-sub').textContent = m.items[1][1];
     }
-  } catch(err) {
-    alert('Une erreur est survenue. Réessayez.');
+  }
+  
+  // Dictée
+  const dict = document.getElementById('dsc1');
+  if(dict) {
+    const scriptEl = dict.querySelector('.dictee-script');
+    if(scriptEl) scriptEl.textContent = m.dicteeScript;
+  }
+  
+  // Fiche
+  const fiche = document.getElementById('dsc2');
+  if(fiche) {
+    const nom = fiche.querySelector('.fiche-nom');
+    const soc = fiche.querySelector('.fiche-soc');
+    const init = fiche.querySelector('.fiche-init');
+    if(nom) nom.textContent = m.ficheNom;
+    if(soc) soc.textContent = m.ficheSoc;
+    if(init) init.textContent = m.ficheInitiales;
+    const fields = fiche.querySelectorAll('.fiche-field-v');
+    m.ficheFields.forEach((f,i) => { if(fields[i]) fields[i].textContent = f[1]; });
+    const fieldLabels = fiche.querySelectorAll('.fiche-field-l');
+    m.ficheFields.forEach((f,i) => { if(fieldLabels[i]) fieldLabels[i].textContent = f[0]; });
+    const note = fiche.querySelector('.fiche-note');
+    if(note) note.textContent = m.ficheNote;
+    const tags = fiche.querySelector('.fiche-tags');
+    if(tags) tags.innerHTML = m.ficheTags.map(t => '<span style="background:#EEEDFE;color:#3C3489;padding:2px 6px;border-radius:6px;font-size:9px;">'+t+'</span>').join('');
+  }
+  
+  // Document
+  const doc = document.getElementById('dsc3');
+  if(doc) {
+    const dt = doc.querySelector('.doc-title');
+    const ds = doc.querySelector('.doc-sub');
+    if(dt) dt.textContent = m.docTitle;
+    if(ds) ds.textContent = m.docSub;
   }
 }
+
+updateScreens();
 </script>
 </body>
 </html>
