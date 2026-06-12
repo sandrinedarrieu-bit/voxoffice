@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VoxOffice — Dictez. On s'occupe du reste.</title>
+<meta property="og:title" content="VoxOffice — Pilotez votre activité en parlant.">
+<meta property="og:description" content="VoxOffice transforme vos paroles en contacts, dossiers, rendez-vous et documents. Bêta privée — rejoignez les premiers utilisateurs.">
+<meta property="og:url" content="https://voxoffice.io">
+<meta property="og:type" content="website">
 <meta name="description" content="VoxOffice supprime la saisie. Dictez vos contacts, notes, interventions — VoxOffice transcrit, classe et génère vos documents automatiquement.">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -246,7 +250,7 @@
   <div class="eyebrow">Votre métier</div>
   <div class="section-h">VoxOffice s'adapte à vous</div>
   <div class="section-sub">Sélectionnez votre profil pour voir l'app dans votre contexte.</div>
-  <div class="profil-label">Je suis...</div>
+  <div class="profil-label">Je suis... <span style="font-size:11px;color:#534AB7;font-weight:500;">↓ cliquez sur votre métier</span></div>
   <div class="pgrid" id="pgrid"></div>
   <div class="profil-content" id="profilContent">
     <div class="pcgrid">
@@ -293,7 +297,7 @@
     <div style="display:flex;gap:6px;margin-bottom:1.2rem;flex-wrap:wrap;" id="dTabs">
       <div class="stab on" onclick="dShow(0)">1 · Tableau de bord</div>
       <div class="stab" onclick="dShow(1)">2 · Dictée vocale</div>
-      <div class="stab" onclick="dShow(2)">3 · Fiche créée</div>
+      <div class="stab" id="tabFiche" onclick="dShow(2)" style="opacity:0.4;cursor:default;">3 · Fiche créée</div>
     </div>
 
     <div class="dscreen on" id="dsc0">
@@ -331,6 +335,7 @@
           <div style="padding:10px;background:var(--color-background-tertiary);min-height:240px;">
             
             <div style="text-align:center;margin-bottom:8px;">
+              <div style="font-size:9px;color:var(--color-text-secondary);margin-bottom:5px;" id="dMst">Appuyer pour simuler</div>
               <button id="dMicBtn" style="width:44px;height:44px;border-radius:50%;background:#534AB7;border:none;cursor:pointer;font-size:20px;display:inline-flex;align-items:center;justify-content:center;" aria-label="Lancer la dictée">🎙️</button>
               <div style="display:flex;align-items:center;justify-content:center;gap:2px;height:14px;margin:3px 0;">
                 <div style="width:2px;border-radius:1px;background:#534AB7;height:2px;transition:height 0.1s;" id="db1"></div>
@@ -339,15 +344,14 @@
                 <div style="width:2px;border-radius:1px;background:#534AB7;height:2px;transition:height 0.1s;" id="db4"></div>
                 <div style="width:2px;border-radius:1px;background:#534AB7;height:2px;transition:height 0.1s;" id="db5"></div>
               </div>
-              <div style="font-size:9px;color:var(--color-text-secondary);" id="dMst">Appuyer pour simuler</div>
             </div>
             <div style="background:var(--color-background-primary);border-radius:8px;border:0.5px solid var(--color-border-tertiary);padding:8px;font-size:9px;color:var(--color-text-secondary);font-style:italic;min-height:36px;line-height:1.5;" id="dTbox">La transcription apparaîtra ici...</div>
           </div>
         </div>
         <div class="demo-right" style="justify-content:center;">
+          <div style="font-size:12px;color:#534AB7;font-weight:500;margin-bottom:10px;">← Cliquez sur le micro violet</div>
           <div style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px;">Dictée vocale en situation réelle</div>
-          <div style="font-size:12px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:12px;">Marie dicte naturellement en marchant. VoxOffice transcrit et extrait automatiquement nom, société, téléphone et budget.</div>
-          <div style="font-size:12px;color:#534AB7;font-weight:500;">← Cliquez sur le micro violet</div>
+          <div style="font-size:12px;color:var(--color-text-secondary);line-height:1.6;">Marie dicte naturellement en marchant. VoxOffice transcrit et extrait automatiquement nom, société, téléphone et budget.</div>
         </div>
       </div>
     </div>
@@ -360,7 +364,7 @@
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
               <div class="fiche-init" style="width:28px;height:28px;border-radius:50%;background:#EEEDFE;color:#3C3489;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:500;flex-shrink:0;">TR</div>
               <div style="flex:1;"><div class="fiche-nom" style="font-size:11px;font-weight:500;">Thomas Renard</div><div class="fiche-soc" style="font-size:8px;color:var(--color-text-secondary);">Renard Industries</div></div>
-              <span style="background:#FAEEDA;color:#854F0B;padding:2px 6px;border-radius:6px;font-size:9px;font-weight:500;">Prospect</span>
+              <span id="ficheBadge" style="background:#FAEEDA;color:#854F0B;padding:2px 6px;border-radius:6px;font-size:9px;font-weight:500;">Prospect</span>
             </div>
             <div style="background:var(--color-background-primary);border-radius:8px;border:0.5px solid var(--color-border-tertiary);padding:8px;margin-bottom:6px;">
               <div style="display:flex;gap:5px;padding:3px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:10px;"><span class="fiche-field-l" style="color:var(--color-text-secondary);width:55px;">Tél.</span><span class="fiche-field-v" style="font-weight:500;">06 23 45 67 89</span></div>
@@ -478,7 +482,7 @@
   <div class="cta-h">VoxOffice se construit avec vous</div>
   <div class="cta-s">5 minutes · anonyme · vos réponses influencent directement le produit final</div>
   <a class="cta-btn" href="https://tally.so/r/gDOGQD" target="_blank">Participer à l'étude — 5 min →</a>
-  <div class="cta-note">Déjà convaincu ? Contactez-nous à contact@VoxOffice.fr</div>
+  <div class="cta-note">Déjà convaincu ? Contactez-nous à contact@voxoffice.io</div>
 </div>
 
 <footer>
@@ -623,6 +627,8 @@ function runDDemo() {
       const m2 = document.getElementById('dMst');
       if(b2) { b2.style.background='#534AB7'; b2.textContent='✅'; }
       if(m2) { m2.textContent='Fiche créée !'; m2.style.color='#3B6D11'; }
+      const tabF = document.getElementById('tabFiche');
+      if(tabF) { tabF.style.opacity='1'; tabF.style.cursor='pointer'; }
       dRunning = false;
       setTimeout(() => dShow(2), 900);
     }
@@ -637,6 +643,7 @@ const metiers = {
     dicteeScript: '"Nouveau contact. Thomas Renard, société Renard Industries. Téléphone 06 23 45 67 89. Budget 20 000 euros, décision fin juillet."',
     dicteeTxt: 'Nouveau contact. Thomas Renard, société Renard Industries. Téléphone 06 23 45 67 89. Budget 20 000 euros, décision fin juillet.',
     ficheNom: 'Thomas Renard', ficheInitiales: 'TR', ficheSoc: 'Renard Industries',
+    ficheStatut: 'Prospect', ficheBadgeColor: '#FAEEDA', ficheBadgeText: '#854F0B',
     ficheFields: [['Tél.','06 23 45 67 89'],['Budget','20 000 €'],['Décision','Fin juillet']],
     ficheNote: '"Budget 20 000 €, décision fin juillet. Relancer début juillet."',
     ficheTags: ['Budget 20k€','Décision juil.','Relance J+15'],
@@ -649,6 +656,7 @@ const metiers = {
     dicteeScript: '"Nouveau chantier. Client Lebrun, 12 rue de la Paix, Caen. Électricité, remplacement tableau. Mardi 17 juin matin. Devis 1 800 euros."',
     dicteeTxt: 'Nouveau chantier. Client Lebrun, 12 rue de la Paix, Caen. Électricité, remplacement tableau. Mardi 17 juin matin. Devis 1 800 euros.',
     ficheNom: 'M. Lebrun', ficheInitiales: 'ML', ficheSoc: '12 rue de la Paix, Caen',
+    ficheStatut: 'Client', ficheBadgeColor: '#EAF3DE', ficheBadgeText: '#3B6D11',
     ficheFields: [['Travaux','Électricité — tableau'],['Date','Mardi 17 juin'],['Devis','1 800 €']],
     ficheNote: '"Remplacement tableau électrique — client disponible mardi matin."',
     ficheTags: ['Intervention J+5','Devis à envoyer'],
@@ -661,7 +669,8 @@ const metiers = {
     dicteeScript: '"Nouveau participant. Sophie Martin, formation IA pour TPE, session du 23 au 25 juin. Téléphone 07 45 23 11 89. Participation confirmée."',
     dicteeTxt: 'Nouveau participant. Sophie Martin, formation IA pour TPE, session du 23 au 25 juin. Téléphone 07 45 23 11 89. Participation confirmée.',
     ficheNom: 'Sophie Martin', ficheInitiales: 'SM', ficheSoc: 'IA pour TPE · 23-25 juin',
-    ficheFields: [['Email','sophie.martin@gmail.com'],['Tél.','07 45 23 11 89'],['Statut','Confirmée']],
+    ficheStatut: 'Stagiaire', ficheBadgeColor: '#EEEDFE', ficheBadgeText: '#3C3489',
+    ficheFields: [['Email','sophie.martin@gmail.com'],['Tél.','07 45 23 11 89'],['Statut','Stagiaire']],
     ficheNote: '"Participation confirmée — session IA pour TPE du 23 au 25 juin."',
     ficheTags: ['Session confirmée','Relance J+7'],
     docTitle: 'Fiche de participation', docSub: 'Générée depuis la confirmation vocale'
@@ -673,6 +682,7 @@ const metiers = {
     dicteeScript: '"Nouveau dossier. Cliente Claire Ferrand, litige commercial contre Martin SARL. Assignation reçue le 10 juin. Audience 15 septembre."',
     dicteeTxt: 'Nouveau dossier. Cliente Claire Ferrand, litige commercial contre Martin SARL. Assignation reçue le 10 juin. Audience 15 septembre.',
     ficheNom: 'Claire Ferrand', ficheInitiales: 'CF', ficheSoc: 'Litige commercial',
+    ficheStatut: 'Dossier', ficheBadgeColor: '#E6F1FB', ficheBadgeText: '#0C447C',
     ficheFields: [['Partie adverse','Martin SARL'],['Audience','15 septembre'],['Délai','Conclusions J+30']],
     ficheNote: '"Assignation reçue — délai conclusions calculé au 10 juillet."',
     ficheTags: ['Conclusions J-60','Audience J-95'],
@@ -692,6 +702,15 @@ function setMetier(id) {
   event.target.style.background = 'rgba(255,255,255,0.25)';
   event.target.style.color = '#EEEDFE';
   event.target.style.borderColor = 'rgba(255,255,255,0.3)';
+  const tf = document.getElementById("tabFiche");
+  if(tf) { tf.style.opacity="0.4"; tf.style.cursor="default"; }
+  const micBtn = document.getElementById("dMicBtn");
+  const mst = document.getElementById("dMst");
+  const tbox = document.getElementById("dTbox");
+  if(micBtn) { micBtn.style.background="#534AB7"; micBtn.textContent="🎙️"; }
+  if(mst) { mst.textContent="Appuyer pour simuler"; mst.style.color="var(--text-muted)"; }
+  if(tbox) { tbox.textContent="La transcription apparaîtra ici..."; tbox.style.fontStyle="italic"; tbox.style.color="var(--text-muted)"; }
+  dRunning = false;
   dShow(0);
   updateScreens();
 }
@@ -733,6 +752,8 @@ function updateScreens() {
     m.ficheFields.forEach((f,i) => { if(fields[i]) fields[i].textContent = f[1]; });
     const fieldLabels = fiche.querySelectorAll('.fiche-field-l');
     m.ficheFields.forEach((f,i) => { if(fieldLabels[i]) fieldLabels[i].textContent = f[0]; });
+    const badge = document.getElementById('ficheBadge');
+    if(badge) { badge.textContent = m.ficheStatut; badge.style.background = m.ficheBadgeColor; badge.style.color = m.ficheBadgeText; }
     const note = fiche.querySelector('.fiche-note');
     if(note) note.textContent = m.ficheNote;
     const tags = fiche.querySelector('.fiche-tags');
