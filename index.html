@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Voxoffice — Dictez. On s'occupe du reste.</title>
-<meta name="description" content="Voxoffice supprime la saisie. Dictez vos contacts, notes, interventions — Voxoffice transcrit, classe et génère vos documents automatiquement.">
+<title>VoxOffice — Dictez. On s'occupe du reste.</title>
+<meta name="description" content="VoxOffice supprime la saisie. Dictez vos contacts, notes, interventions — VoxOffice transcrit, classe et génère vos documents automatiquement.">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -198,13 +198,13 @@
       <circle cx="10" cy="10" r="4" stroke="#534AB7" stroke-width="1.5"/>
       <circle cx="10" cy="10" r="1.5" fill="#534AB7"/>
     </svg>
-    Voxoffice
+    VoxOffice
   </a>
   <a class="nav-cta" href="https://tally.so/r/gDOGQD" target="_blank">Participer à l'étude</a>
 </nav>
 
 <div class="hero">
-  <div class="hero-badge">✦ En cours de développement — donnez-nous votre avis</div>
+  <div class="hero-badge">✦ Bêta privée — rejoignez les premiers utilisateurs</div>
   <h1>Pilotez votre activité<br>en parlant.</h1>
   <p>VoxOffice est l'espace de travail intelligent qui transforme automatiquement vos paroles en contacts, dossiers, rendez-vous, documents et actions métier.</p>
 </div>
@@ -212,9 +212,41 @@
 
 <!-- BANDEAU HERO -->
 <div style="text-align:center;padding:1rem 2rem 2rem;">
-  <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:2rem;flex-wrap:wrap;">
-    <a class="cta-btn" href="https://tally.so/r/gDOGQD" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;font-size:14px;">🚀 Rejoindre la bêta VoxOffice</a>
+  <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:1.5rem;flex-wrap:wrap;">
+    <button onclick="document.getElementById('beta-form').style.display=document.getElementById('beta-form').style.display==='none'?'block':'none'" class="cta-btn" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;font-size:14px;border:none;cursor:pointer;">🚀 Rejoindre la bêta</button>
+    <a href="https://tally.so/r/gDOGQD" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;font-size:14px;font-weight:500;border:1.5px solid var(--border);border-radius:var(--radius-lg);color:var(--text);text-decoration:none;transition:all 0.15s;" onmouseover="this.style.borderColor='var(--purple)'" onmouseout="this.style.borderColor='var(--border)'">💬 Donner mon avis</a>
     <a href="#demo-section" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;font-size:14px;font-weight:500;border:1.5px solid var(--border);border-radius:var(--radius-lg);color:var(--text);text-decoration:none;transition:all 0.15s;" onmouseover="this.style.borderColor='var(--purple)'" onmouseout="this.style.borderColor='var(--border)'">🎬 Voir la démo</a>
+  </div>
+  <!-- MINI FORMULAIRE BETA -->
+  <div id="beta-form" style="display:none;max-width:420px;margin:0 auto 1.5rem;background:var(--bg);border-radius:var(--radius-lg);border:1px solid var(--border);padding:20px;">
+    <div style="font-size:14px;font-weight:600;margin-bottom:4px;">Accès prioritaire à la bêta</div>
+    <div style="font-size:12px;color:var(--text-muted);margin-bottom:14px;">Vous serez parmi les premiers informés du lancement.</div>
+    <form id="betaFormEl" onsubmit="submitBeta(event)">
+      <input type="hidden" name="access_key" value="VOTRE_CLE_WEB3FORMS">
+      <input type="hidden" name="subject" value="Nouvelle inscription bêta VoxOffice">
+      <div style="margin-bottom:10px;">
+        <input type="text" name="prenom" placeholder="Votre prénom" required style="width:100%;border:1px solid var(--border);border-radius:var(--radius-md);padding:9px 12px;font-size:13px;outline:none;background:var(--bg-secondary);">
+      </div>
+      <div style="margin-bottom:10px;">
+        <input type="email" name="email" placeholder="Votre email" required style="width:100%;border:1px solid var(--border);border-radius:var(--radius-md);padding:9px 12px;font-size:13px;outline:none;background:var(--bg-secondary);">
+      </div>
+      <div style="margin-bottom:14px;">
+        <select name="metier" required style="width:100%;border:1px solid var(--border);border-radius:var(--radius-md);padding:9px 12px;font-size:13px;outline:none;background:var(--bg-secondary);color:var(--text);">
+          <option value="" disabled selected>Votre métier</option>
+          <option>Commercial / Représentant</option>
+          <option>Avocat / Juriste</option>
+          <option>Artisan BTP</option>
+          <option>Agent immobilier</option>
+          <option>Aide à domicile / EHPAD</option>
+          <option>Chargé de mission associatif</option>
+          <option>Responsable de formation</option>
+          <option>Association / Bénévoles</option>
+          <option>Autre</option>
+        </select>
+      </div>
+      <button type="submit" class="cta-btn" style="width:100%;border:none;cursor:pointer;padding:11px;font-size:13px;">🚀 Rejoindre la bêta</button>
+    </form>
+    <div id="beta-success" style="display:none;text-align:center;padding:12px;background:var(--green-light);border-radius:var(--radius-md);margin-top:10px;font-size:13px;color:var(--green-dark);">✅ Inscription confirmée — nous vous contacterons en priorité !</div>
   </div>
   <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:600px;margin:0 auto;">
     <div style="background:var(--bg-secondary);border-radius:var(--radius-lg);padding:16px 10px;text-align:center;">
@@ -240,7 +272,7 @@
 
 <div class="section">
   <div class="eyebrow">Votre métier</div>
-  <div class="section-h">Voxoffice s'adapte à vous</div>
+  <div class="section-h">VoxOffice s'adapte à vous</div>
   <div class="section-sub">Sélectionnez votre profil pour voir l'app dans votre contexte.</div>
   <div class="profil-label">Je suis...</div>
   <div class="pgrid" id="pgrid"></div>
@@ -249,7 +281,7 @@
       <div class="pc-card">
         <div class="pc-title">Ce que vous faites en double aujourd'hui</div>
         <div id="painList"></div>
-        <div class="pc-title mt-12" style="color:#3B6D11;">Avec Voxoffice</div>
+        <div class="pc-title mt-12" style="color:#3B6D11;">Avec VoxOffice</div>
         <div id="goodList"></div>
       </div>
       <div class="screen-card">
@@ -263,7 +295,7 @@
   </div>
   <div class="autre-box" id="autreBox">
     <div style="font-size:14px;font-weight:600;margin-bottom:6px;">Votre métier n'est pas dans la liste ?</div>
-    <div style="font-size:13px;color:var(--text-muted);margin-bottom:8px;">Voxoffice peut s'adapter — dites-nous ce que vous faites.</div>
+    <div style="font-size:13px;color:var(--text-muted);margin-bottom:8px;">VoxOffice peut s'adapter — dites-nous ce que vous faites.</div>
     <input class="autre-inp" type="text" placeholder="Ex : photographe, coach, ostéopathe..." id="autreInp"/>
     <div class="mt-12"><a class="nav-cta" href="https://tally.so/r/gDOGQD" target="_blank">Participer à l'étude — 5 min →</a></div>
   </div>
@@ -272,9 +304,9 @@
 <div class="divider"></div>
 
 <div class="section" id="demo-section">
-  <div class="eyebrow">Voyez par vous-même</div>
+  <div class="eyebrow">Essayez par vous-même</div>
   <div class="section-h">Dictez. VoxOffice fait le reste.</div>
-  <div class="section-sub">Choisissez votre métier, cliquez sur le micro — voyez Voxoffice créer votre fiche, enregistrer votre note et générer votre document en temps réel.</div>
+  <div class="section-sub">Choisissez votre métier, cliquez sur le micro — voyez VoxOffice créer votre fiche, enregistrer votre note et générer votre document en temps réel.</div>
   <div class="demo-wrap">
     <div class="scenario-tabs" id="dTabs"></div>
     <div class="step-indicator">
@@ -327,7 +359,7 @@
 <div class="section">
   <div class="eyebrow">Le vrai différenciateur</div>
   <div class="section-h">Vos documents se génèrent seuls</div>
-  <div class="section-sub">Voxoffice utilise l'IA pour remplir automatiquement vos documents depuis vos fiches. Un bon d'intervention, un compte-rendu, des conclusions — en quelques secondes.</div>
+  <div class="section-sub">VoxOffice utilise l'IA pour remplir automatiquement vos documents depuis vos fiches. Un bon d'intervention, un compte-rendu, des conclusions — en quelques secondes.</div>
   <div class="gen-grid">
     <div class="gen-card"><div class="gen-icon">👤</div><div class="gen-t">Fiche contact</div><div class="gen-s">Nom, société, historique</div></div>
     <div class="gen-card"><div class="gen-icon">🎙️</div><div class="gen-t">Notes vocales</div><div class="gen-s">Transcrites dans la base</div></div>
@@ -335,7 +367,7 @@
     <div class="gen-card"><div class="gen-icon">🧾</div><div class="gen-t">Suivi financier</div><div class="gen-s">Factures et statuts</div></div>
   </div>
   <div class="ai-bar">
-    <div class="ai-lbl">✦ Voxoffice génère votre document...</div>
+    <div class="ai-lbl">✦ VoxOffice génère votre document...</div>
     <div class="ai-line" style="width:90%;"></div>
     <div class="ai-line" style="width:72%;"></div>
     <div class="ai-line" style="width:55%;"></div>
@@ -386,14 +418,14 @@
 
 <div class="cta-sec" id="cta-anchor">
   <div class="eyebrow" style="text-align:center;margin-bottom:8px;">Étude de marché</div>
-  <div class="cta-h">Voxoffice se construit avec vous</div>
+  <div class="cta-h">VoxOffice se construit avec vous</div>
   <div class="cta-s">5 minutes · anonyme · vos réponses influencent directement le produit final</div>
   <a class="cta-btn" href="https://tally.so/r/gDOGQD" target="_blank">Participer à l'étude — 5 min →</a>
-  <div class="cta-note">Déjà convaincu ? Contactez-nous à contact@voxoffice.fr</div>
+  <div class="cta-note">Déjà convaincu ? Contactez-nous à contact@VoxOffice.fr</div>
 </div>
 
 <footer>
-  <div class="footer-logo">◎ Voxoffice · 2026</div>
+  <div class="footer-logo">◎ VoxOffice · 2026</div>
 </footer>
 
 </div>
@@ -444,10 +476,10 @@ const profils = [
 ];
 
 const reveals = {
-  tape:{t:'Vous perdez du temps à taper',b:"La saisie après un RDV prend en moyenne 4 minutes. Avec Voxoffice, vous dictez en marchant — 30 secondes, mains libres."},
-  papier:{t:'Vos notes papier disparaissent',b:"Un carnet perdu et l'information n'existe plus. Voxoffice transcrit votre voix et lie la note à la fiche contact."},
-  email:{t:'Vos emails se noient dans la boîte',b:"Retrouvabilité nulle. Voxoffice enregistre directement sur la fiche du contact — retrouvable en 1 tap."},
-  rien:{t:'Vous perdez 30% des informations',b:"La mémoire oublie les détails en moins d'une heure. Voxoffice vous permet de dicter avant d'oublier."}
+  tape:{t:'Vous perdez du temps à taper',b:"La saisie après un RDV prend en moyenne 4 minutes. Avec VoxOffice, vous dictez en marchant — 30 secondes, mains libres."},
+  papier:{t:'Vos notes papier disparaissent',b:"Un carnet perdu et l'information n'existe plus. VoxOffice transcrit votre voix et lie la note à la fiche contact."},
+  email:{t:'Vos emails se noient dans la boîte',b:"Retrouvabilité nulle. VoxOffice enregistre directement sur la fiche du contact — retrouvable en 1 tap."},
+  rien:{t:'Vous perdez 30% des informations',b:"La mémoire oublie les détails en moins d'une heure. VoxOffice vous permet de dicter avant d'oublier."}
 };
 
 function selectProfil(id) {
@@ -611,7 +643,7 @@ document.getElementById('dMicBtn').addEventListener('click', () => {
       lbl.textContent = 'Traitement en cours...'; lbl.classList.remove('act');
       dSetStep(3);
       setTimeout(() => {
-        lbl.textContent = 'Enregistré dans Voxoffice';
+        lbl.textContent = 'Enregistré dans VoxOffice';
         dTypeFields(dCurrent.fields, dCurrent.badges, () => {
           setTimeout(() => {
             document.getElementById('dPanelNote').classList.add('show');
@@ -641,6 +673,25 @@ dScenarios.forEach(s => {
 });
 
 setDScenario(dScenarios[0]);
+
+async function submitBeta(e) {
+  e.preventDefault();
+  const form = document.getElementById('betaFormEl');
+  const data = new FormData(form);
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: data
+    });
+    const json = await res.json();
+    if (json.success) {
+      form.style.display = 'none';
+      document.getElementById('beta-success').style.display = 'block';
+    }
+  } catch(err) {
+    alert('Une erreur est survenue. Réessayez.');
+  }
+}
 </script>
 </body>
 </html>
