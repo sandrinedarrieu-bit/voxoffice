@@ -209,8 +209,8 @@
   </a>
   <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
     <button onclick="document.getElementById('beta-form').style.display=document.getElementById('beta-form').style.display==='none'?'block':'none'" class="nav-cta" style="cursor:pointer;border:none;">🚀 Rejoindre la bêta</button>
+    <a class="nav-cta" href="https://vox-office-voice-hub.lovable.app" target="_blank" style="background:#0C447C;color:#fff;border:none;">📱 Voir le prototype</a>
     <a class="nav-cta" href="https://tally.so/r/gDOGQD" target="_blank" style="background:transparent;color:var(--purple);border:1.5px solid var(--purple);">💬 Donner mon avis</a>
-    <a href="#demo-section" class="nav-cta" style="background:transparent;color:var(--text);border:1.5px solid var(--border);">🎬 Voir la démo</a>
   </div>
 </nav>
 
@@ -279,144 +279,6 @@
 
 <div class="divider"></div>
 
-<div class="section" id="demo-section">
-  <div class="eyebrow">Essayez par vous-même</div>
-  <div class="section-h">Dictez. VoxOffice fait le reste.</div>
-  <div class="section-sub">Suivez Marie, commerciale terrain, de la dictée vocale au document professionnel — en moins de 2 minutes, sans saisie.</div>
-
-  <div class="demo-wrap">
-    <div style="background:#534AB7;border-radius:var(--radius-lg);padding:10px 14px;margin-bottom:10px;">
-      <div style="font-size:10px;font-weight:500;color:#AFA9EC;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">Choisissez votre métier</div>
-      <div style="display:flex;gap:6px;flex-wrap:wrap;" id="metierTabs">
-        <div style="padding:6px 14px;border-radius:16px;font-size:12px;font-weight:500;cursor:pointer;background:rgba(255,255,255,0.25);color:#EEEDFE;border:1px solid rgba(255,255,255,0.3);" class="mtab on" onclick="setMetier('commercial')">💼 Commercial</div>
-        <div style="padding:6px 14px;border-radius:16px;font-size:12px;font-weight:500;cursor:pointer;background:transparent;color:rgba(255,255,255,0.65);border:1px solid rgba(255,255,255,0.2);" class="mtab" onclick="setMetier('artisan')">🔧 Artisan BTP</div>
-        <div style="padding:6px 14px;border-radius:16px;font-size:12px;font-weight:500;cursor:pointer;background:transparent;color:rgba(255,255,255,0.65);border:1px solid rgba(255,255,255,0.2);" class="mtab" onclick="setMetier('formateur')">🎓 Formateur</div>
-        <div style="padding:6px 14px;border-radius:16px;font-size:12px;font-weight:500;cursor:pointer;background:transparent;color:rgba(255,255,255,0.65);border:1px solid rgba(255,255,255,0.2);" class="mtab" onclick="setMetier('avocat')">⚖️ Avocat</div>
-      </div>
-    </div>
-    <div style="display:flex;gap:6px;margin-bottom:1.2rem;flex-wrap:wrap;" id="dTabs">
-      <div class="stab on" onclick="dShow(0)">1 · Tableau de bord</div>
-      <div class="stab" onclick="dShow(1)">2 · Dictée vocale</div>
-      <div class="stab" id="tabFiche" onclick="dShow(2)" style="opacity:0.4;cursor:default;">3 · Fiche créée</div>
-    </div>
-
-    <div class="dscreen on" id="dsc0">
-      <div class="demo-grid">
-        <div class="demo-left" style="border-radius:20px;overflow:hidden;padding:0;">
-          <div style="background:#534AB7;padding:10px 12px;"><div class="ptitle" style="color:#EEEDFE;font-size:11px;font-weight:500;">VoxOffice · Commercial</div><div class="psub" style="color:#AFA9EC;font-size:9px;margin-top:1px;">Bonjour Marie · Commercial</div></div>
-          <div style="padding:10px;background:var(--color-background-tertiary);min-height:240px;">
-            <div style="display:flex;gap:4px;margin-bottom:8px;">
-              <div style="flex:1;background:var(--color-background-primary);border-radius:8px;border:0.5px solid var(--color-border-tertiary);padding:6px;text-align:center;"><div style="font-size:14px;font-weight:500;color:#534AB7;">3</div><div style="font-size:8px;color:var(--color-text-secondary);">Alertes</div></div>
-              <div style="flex:1;background:var(--color-background-primary);border-radius:8px;border:0.5px solid var(--color-border-tertiary);padding:6px;text-align:center;"><div style="font-size:14px;font-weight:500;color:#534AB7;">2</div><div style="font-size:8px;color:var(--color-text-secondary);">RDV</div></div>
-              <div style="flex:1;background:var(--color-background-primary);border-radius:8px;border:0.5px solid var(--color-border-tertiary);padding:6px;text-align:center;"><div style="font-size:14px;font-weight:500;color:#E24B4A;">4</div><div style="font-size:8px;color:var(--color-text-secondary);">Relances</div></div>
-            </div>
-            <div class="dash-item" style="background:var(--color-background-primary);border-radius:8px;border:0.5px solid var(--color-border-tertiary);padding:8px 10px;margin-bottom:6px;"><div class="di-title" style="font-size:10px;font-weight:500;">Dupont SAS</div><div class="di-sub" style="font-size:8px;color:var(--color-text-secondary);">RDV effectué · 2h</div></div>
-            <div class="dash-item" style="background:var(--color-background-primary);border-radius:8px;border:0.5px solid var(--color-border-tertiary);padding:8px 10px;"><div class="di-title" style="font-size:10px;font-weight:500;">Martin &amp; Co</div><div class="di-sub" style="font-size:8px;color:var(--color-text-secondary);">Relance en attente · J-2</div></div>
-          </div>
-          <div style="display:flex;border-top:0.5px solid var(--color-border-tertiary);background:var(--color-background-primary);padding:6px 0 4px;">
-            <div style="flex:1;text-align:center;font-size:8px;color:#534AB7;">🏠 Accueil</div>
-            <div style="flex:1;text-align:center;font-size:8px;color:var(--color-text-secondary);">👥 Contacts</div>
-            <div style="flex:1;text-align:center;font-size:8px;color:var(--color-text-secondary);">📅 Agenda</div>
-            <div style="flex:1;text-align:center;font-size:8px;color:var(--color-text-secondary);">🔔 Alertes</div>
-          </div>
-        </div>
-        <div class="demo-right" style="justify-content:center;">
-          <div style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px;">Tableau de bord commercial</div>
-          <div style="font-size:12px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:12px;">Marie sort d'un RDV avec un nouveau prospect. Elle voit ses alertes, RDV et relances en un coup d'œil.</div>
-          <button onclick="dShow(1)" style="width:100%;background:#534AB7;color:#fff;border:none;border-radius:8px;padding:10px;font-size:12px;font-weight:500;cursor:pointer;">🎙️ Voir la dictée →</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="dscreen" id="dsc1">
-      <div class="demo-grid">
-        <div class="demo-left" style="border-radius:20px;overflow:hidden;padding:0;">
-          <div style="background:#534AB7;padding:10px 12px;"><div style="color:#EEEDFE;font-size:11px;font-weight:500;">Nouveau contact · Dictée</div></div>
-          <div style="padding:10px;background:var(--color-background-tertiary);min-height:240px;">
-            
-            <div style="text-align:center;margin-bottom:8px;">
-              <div style="font-size:9px;color:var(--color-text-secondary);margin-bottom:5px;" id="dMst">Appuyer pour simuler</div>
-              <button id="dMicBtn" style="width:44px;height:44px;border-radius:50%;background:#534AB7;border:none;cursor:pointer;font-size:20px;display:inline-flex;align-items:center;justify-content:center;" aria-label="Lancer la dictée">🎙️</button>
-              <div style="display:flex;align-items:center;justify-content:center;gap:2px;height:14px;margin:3px 0;">
-                <div style="width:2px;border-radius:1px;background:#534AB7;height:2px;transition:height 0.1s;" id="db1"></div>
-                <div style="width:2px;border-radius:1px;background:#534AB7;height:2px;transition:height 0.1s;" id="db2"></div>
-                <div style="width:2px;border-radius:1px;background:#534AB7;height:2px;transition:height 0.1s;" id="db3"></div>
-                <div style="width:2px;border-radius:1px;background:#534AB7;height:2px;transition:height 0.1s;" id="db4"></div>
-                <div style="width:2px;border-radius:1px;background:#534AB7;height:2px;transition:height 0.1s;" id="db5"></div>
-              </div>
-            </div>
-            <div style="background:var(--color-background-primary);border-radius:8px;border:0.5px solid var(--color-border-tertiary);padding:8px;font-size:9px;color:var(--color-text-secondary);font-style:italic;min-height:36px;line-height:1.5;" id="dTbox">La transcription apparaîtra ici...</div>
-          </div>
-        </div>
-        <div class="demo-right" style="justify-content:center;">
-          <div style="font-size:12px;color:#534AB7;font-weight:500;margin-bottom:10px;">← Cliquez sur le micro violet</div>
-          <div style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px;">Dictée vocale en situation réelle</div>
-          <div style="font-size:12px;color:var(--color-text-secondary);line-height:1.6;">Marie dicte naturellement en marchant. VoxOffice transcrit et extrait automatiquement nom, société, téléphone et budget.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="dscreen" id="dsc2">
-      <div class="demo-grid">
-        <div class="demo-left" style="border-radius:20px;overflow:hidden;padding:0;">
-          <div style="background:#534AB7;padding:10px 12px;"><div style="color:#EEEDFE;font-size:11px;font-weight:500;">Thomas Renard</div><div style="color:#AFA9EC;font-size:9px;">Renard Industries · Prospect</div></div>
-          <div style="padding:10px;background:var(--color-background-tertiary);min-height:240px;">
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-              <div class="fiche-init" style="width:28px;height:28px;border-radius:50%;background:#EEEDFE;color:#3C3489;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:500;flex-shrink:0;">TR</div>
-              <div style="flex:1;"><div class="fiche-nom" style="font-size:11px;font-weight:500;">Thomas Renard</div><div class="fiche-soc" style="font-size:8px;color:var(--color-text-secondary);">Renard Industries</div></div>
-              <span id="ficheBadge" style="background:#FAEEDA;color:#854F0B;padding:2px 6px;border-radius:6px;font-size:9px;font-weight:500;">Prospect</span>
-            </div>
-            <div style="background:var(--color-background-primary);border-radius:8px;border:0.5px solid var(--color-border-tertiary);padding:8px;margin-bottom:6px;">
-              <div style="display:flex;gap:5px;padding:3px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:10px;"><span class="fiche-field-l" style="color:var(--color-text-secondary);width:55px;">Tél.</span><span class="fiche-field-v" style="font-weight:500;">06 23 45 67 89</span></div>
-              <div style="display:flex;gap:5px;padding:3px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:10px;"><span class="fiche-field-l" style="color:var(--color-text-secondary);width:55px;">Budget</span><span class="fiche-field-v" style="font-weight:500;">20 000 €</span></div>
-              <div style="display:flex;gap:5px;padding:3px 0;font-size:10px;"><span class="fiche-field-l" style="color:var(--color-text-secondary);width:55px;">Décision</span><span class="fiche-field-v" style="font-weight:500;">Fin juillet</span></div>
-            </div>
-            <div class="fiche-note" style="background:#EEEDFE;border-radius:8px;padding:6px 8px;font-size:9px;color:#26215C;line-height:1.5;">"Budget 20 000 €, décision fin juillet. Relancer début juillet."</div>
-            <div class="fiche-tags" style="display:flex;gap:3px;flex-wrap:wrap;margin-top:5px;"><span style="background:#EEEDFE;color:#3C3489;padding:2px 6px;border-radius:6px;font-size:9px;">Budget 20k€</span><span style="background:#FAEEDA;color:#854F0B;padding:2px 6px;border-radius:6px;font-size:9px;">Décision juil.</span><span style="background:#EAF3DE;color:#3B6D11;padding:2px 6px;border-radius:6px;font-size:9px;">Relance J+15</span></div>
-          </div>
-        </div>
-        <div class="demo-right" style="justify-content:center;">
-          <div style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px;">Fiche créée automatiquement</div>
-          <div style="font-size:12px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:12px;">En 30 secondes, VoxOffice a créé la fiche complète avec note vocale et tags. Accessible par toute l'équipe immédiatement.</div>
-<div style="background:#EAF3DE;border-radius:8px;padding:10px;font-size:12px;color:#3B6D11;font-weight:500;text-align:center;">✓ Fiche créée — 30 secondes, zéro saisie</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="dscreen" id="dsc3">
-      <div class="demo-grid">
-        <div class="demo-left" style="border-radius:20px;overflow:hidden;padding:0;">
-          <div style="background:#534AB7;padding:10px 12px;"><div style="color:#EEEDFE;font-size:11px;font-weight:500;">Compte-rendu</div><div style="color:#AFA9EC;font-size:9px;">Généré par IA · Thomas Renard</div></div>
-          <div style="padding:10px;background:var(--color-background-tertiary);min-height:240px;">
-            <div style="background:#EEEDFE;border-radius:8px;padding:8px;margin-bottom:8px;">
-              <div style="font-size:9px;font-weight:500;color:#534AB7;margin-bottom:5px;">✦ <span class="doc-title">Compte-rendu de prospection</span></div>
-              <div style="height:4px;border-radius:2px;background:#AFA9EC;margin-bottom:3px;width:90%;"></div>
-              <div style="height:4px;border-radius:2px;background:#AFA9EC;margin-bottom:3px;width:75%;"></div>
-              <div style="height:4px;border-radius:2px;background:#AFA9EC;width:55%;"></div>
-            </div>
-            <div style="background:var(--color-background-primary);border-radius:8px;border:0.5px solid var(--color-border-tertiary);padding:8px;margin-bottom:8px;">
-              <div style="font-size:8px;color:var(--color-text-secondary);margin-bottom:4px;">Généré depuis</div>
-              <div style="font-size:9px;margin-bottom:3px;" class="doc-sub">👤 Généré depuis la fiche + note vocale</div>
-            </div>
-            <div style="display:flex;gap:4px;">
-              <button style="flex:1;background:#534AB7;color:#fff;border:none;border-radius:8px;padding:6px;font-size:9px;cursor:pointer;">⬇️ PDF</button>
-              <button style="flex:1;background:var(--color-background-primary);color:var(--color-text-primary);border:0.5px solid var(--color-border-tertiary);border-radius:8px;padding:6px;font-size:9px;cursor:pointer;">✉️ Email</button>
-            </div>
-          </div>
-        </div>
-        <div class="demo-right" style="justify-content:center;">
-          <div style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px;">Document généré par IA</div>
-          <div style="font-size:12px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:12px;">Compte-rendu complet depuis la fiche et la note vocale. Téléchargeable en PDF ou envoyable par email directement.</div>
-          <div style="background:#EAF3DE;border-radius:8px;padding:10px;font-size:12px;color:#3B6D11;font-weight:500;margin-bottom:8px;">✓ 2 minutes · zéro saisie</div>
-          <button onclick="dShow(0)" style="width:100%;background:var(--color-background-secondary);color:var(--color-text-primary);border:0.5px solid var(--color-border-tertiary);border-radius:8px;padding:10px;font-size:12px;cursor:pointer;">↺ Recommencer</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
 <div class="section">
   <div class="eyebrow">Le vrai différenciateur</div>
   <div class="section-h">Vos documents se génèrent seuls</div>
@@ -444,7 +306,7 @@
     <div class="eyebrow" style="text-align:center;margin-bottom:8px;">Prototype interactif</div>
     <div class="section-h" style="margin-bottom:8px;">Testez VoxOffice sur votre téléphone</div>
     <div style="font-size:14px;color:var(--text-muted);margin-bottom:1.5rem;line-height:1.7;">Naviguez dans l'app, explorez les écrans, ressentez l'expérience — sans installation.</div>
-    <a href="https://vox-office-voice-hub.lovable.app" target="_blank" class="cta-btn" style="display:inline-flex;align-items:center;gap:8px;margin-bottom:12px;">📱 Accéder au prototype →</a>
+    <a href="https://vox-office-voice-hub.lovable.app" target="_blank" class="cta-btn" style="display:inline-flex;align-items:center;gap:8px;margin-bottom:12px;">📱 Voir le prototype →</a>
     <div style="font-size:12px;color:var(--text-muted);">Prototype de démonstration — la version complète est en cours de développement.</div>
   </div>
 </div>
@@ -457,16 +319,16 @@
       <div class="eyebrow" style="text-align:center;">Tarifs</div>
       <div class="section-h" style="text-align:center;margin-bottom:4px;">Simple et prévisible</div>
       <div style="font-size:13px;color:var(--text-muted);text-align:center;margin-bottom:1rem;">Un prix fixe, quel que soit le nombre d'utilisateurs.</div>
-      <div class="activation-note">Activation unique <strong>500 €</strong> pour les deux offres</div>
+      <div class="activation-note">Activation unique <strong style="text-decoration:line-through;color:var(--text-muted);font-weight:normal;">1 000 €</strong> <strong style="color:var(--purple);">500 € HT</strong> <span style="background:#EAF3DE;color:#3B6D11;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;">Prix lancement · 20 premiers clients</span></div>
     </div>
     <div class="price-grid">
       <div class="price-card">
         <div class="price-name">Starter</div>
-        <div class="price-amt">20 €</div>
-        <div class="price-period">par mois · 5 modules au choix</div>
+        <div class="price-amt">20 € <span style="font-size:14px;font-weight:400;color:var(--text-muted);">HT</span></div>
+        <div class="price-period">par mois HT · prix fixe · 5 modules au choix</div>
         <div class="price-feat">
           <div><span class="check">✓</span>5 modules configurables</div>
-          <div><span class="check">✓</span>Jusqu'à 15 utilisateurs</div>
+          <div><span class="check">✓</span>Prix fixe jusqu'à 15 utilisateurs</div>
           <div><span class="check">✓</span>Mobile + ordinateur</div>
           <div><span class="check">✓</span>Support inclus</div>
         </div>
@@ -474,17 +336,17 @@
       <div class="price-card featured">
         <div class="price-badge">Recommandé</div>
         <div class="price-name">Pro</div>
-        <div class="price-amt">35 €</div>
-        <div class="price-period">par mois · accès complet</div>
+        <div class="price-amt">35 € <span style="font-size:14px;font-weight:400;color:var(--text-muted);">HT</span></div>
+        <div class="price-period">par mois HT · prix fixe · accès complet</div>
         <div class="price-feat">
           <div><span class="check">✓</span>10 modules complets</div>
-          <div><span class="check">✓</span>Jusqu'à 15 utilisateurs</div>
+          <div><span class="check">✓</span>Prix fixe jusqu'à 15 utilisateurs</div>
           <div><span class="check">✓</span>Génération IA de documents</div>
           <div><span class="check">✓</span>Dictée vocale incluse</div>
         </div>
       </div>
     </div>
-    <div class="limit-note">ℹ️ Au-delà de 15 utilisateurs — tarif sur devis</div>
+    <div class="limit-note">ℹ️ Prix HT · Prix fixe jusqu'à 15 utilisateurs — au-delà, tarif sur devis</div>
   </div>
 </div>
 
