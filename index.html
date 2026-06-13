@@ -193,6 +193,72 @@
 
   .dscreen { display: none; }
   .dscreen.on { display: block; }
+ @media (max-width: 768px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 18px 20px !important;
+  }
+
+  nav > div {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+
+  .nav-cta {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  section {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+
+  h1 {
+    font-size: 38px !important;
+    line-height: 1.15 !important;
+  }
+
+  h2 {
+    font-size: 30px !important;
+    line-height: 1.2 !important;
+  }
+
+  h3 {
+    font-size: 24px !important;
+  }
+
+  p {
+    font-size: 16px !important;
+  }
+
+  input,
+  button {
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  #beta-signup {
+    max-width: 100% !important;
+    margin: 50px auto !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+
+  #beta-signup > div {
+    padding: 28px 20px !important;
+  }
+
+}
 </style>
 </head>
 <body>
